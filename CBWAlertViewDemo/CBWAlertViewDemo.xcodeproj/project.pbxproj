@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D01852CC1CDA080300266065 /* CBWAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D01852CB1CDA080300266065 /* CBWAlertView.m */; };
+		D01852E31CDA0D1700266065 /* CBWAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D01852E21CDA0D1700266065 /* CBWAlertView.m */; };
+		D01852E61CDA0D4A00266065 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01852E41CDA0D4A00266065 /* LaunchScreen.storyboard */; };
+		D01852E71CDA0D4A00266065 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01852E51CDA0D4A00266065 /* Main.storyboard */; };
 		D0D354EF1CD9A284003FECBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D354EE1CD9A284003FECBB /* main.m */; };
 		D0D354F21CD9A284003FECBB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D354F11CD9A284003FECBB /* AppDelegate.m */; };
 		D0D354F51CD9A284003FECBB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D354F41CD9A284003FECBB /* ViewController.m */; };
-		D0D354F81CD9A284003FECBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D354F61CD9A284003FECBB /* Main.storyboard */; };
 		D0D354FA1CD9A284003FECBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0D354F91CD9A284003FECBB /* Assets.xcassets */; };
-		D0D354FD1CD9A284003FECBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D354FB1CD9A284003FECBB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D01852CA1CDA080300266065 /* CBWAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBWAlertView.h; sourceTree = "<group>"; };
-		D01852CB1CDA080300266065 /* CBWAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBWAlertView.m; sourceTree = "<group>"; };
+		D01852E11CDA0D1700266065 /* CBWAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBWAlertView.h; sourceTree = "<group>"; };
+		D01852E21CDA0D1700266065 /* CBWAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBWAlertView.m; sourceTree = "<group>"; };
+		D01852E41CDA0D4A00266065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D01852E51CDA0D4A00266065 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D0D354EA1CD9A284003FECBB /* CBWAlertViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBWAlertViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D354EE1CD9A284003FECBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D0D354F01CD9A284003FECBB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D0D354F11CD9A284003FECBB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D0D354F31CD9A284003FECBB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D0D354F41CD9A284003FECBB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D0D354F71CD9A284003FECBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D0D354F91CD9A284003FECBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D0D354FC1CD9A284003FECBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0D354FE1CD9A284003FECBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,11 +42,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D01852C91CDA07E100266065 /* CBWAlertView */ = {
+		D01852E01CDA0D1700266065 /* CBWAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D01852CA1CDA080300266065 /* CBWAlertView.h */,
-				D01852CB1CDA080300266065 /* CBWAlertView.m */,
+				D01852E11CDA0D1700266065 /* CBWAlertView.h */,
+				D01852E21CDA0D1700266065 /* CBWAlertView.m */,
 			);
 			path = CBWAlertView;
 			sourceTree = "<group>";
@@ -54,6 +54,7 @@
 		D0D354E11CD9A284003FECBB = {
 			isa = PBXGroup;
 			children = (
+				D01852E01CDA0D1700266065 /* CBWAlertView */,
 				D0D354EC1CD9A284003FECBB /* CBWAlertViewDemo */,
 				D0D354EB1CD9A284003FECBB /* Products */,
 			);
@@ -70,15 +71,13 @@
 		D0D354EC1CD9A284003FECBB /* CBWAlertViewDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D01852C91CDA07E100266065 /* CBWAlertView */,
-				D0D355041CD9A2D9003FECBB /* CBWAlertView */,
 				D0D354F01CD9A284003FECBB /* AppDelegate.h */,
 				D0D354F11CD9A284003FECBB /* AppDelegate.m */,
 				D0D354F31CD9A284003FECBB /* ViewController.h */,
 				D0D354F41CD9A284003FECBB /* ViewController.m */,
-				D0D354F61CD9A284003FECBB /* Main.storyboard */,
+				D01852E41CDA0D4A00266065 /* LaunchScreen.storyboard */,
+				D01852E51CDA0D4A00266065 /* Main.storyboard */,
 				D0D354F91CD9A284003FECBB /* Assets.xcassets */,
-				D0D354FB1CD9A284003FECBB /* LaunchScreen.storyboard */,
 				D0D354FE1CD9A284003FECBB /* Info.plist */,
 				D0D354ED1CD9A284003FECBB /* Supporting Files */,
 			);
@@ -91,13 +90,6 @@
 				D0D354EE1CD9A284003FECBB /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D0D355041CD9A2D9003FECBB /* CBWAlertView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CBWAlertView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,9 +149,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0D354FD1CD9A284003FECBB /* LaunchScreen.storyboard in Resources */,
+				D01852E71CDA0D4A00266065 /* Main.storyboard in Resources */,
 				D0D354FA1CD9A284003FECBB /* Assets.xcassets in Resources */,
-				D0D354F81CD9A284003FECBB /* Main.storyboard in Resources */,
+				D01852E61CDA0D4A00266065 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D01852CC1CDA080300266065 /* CBWAlertView.m in Sources */,
+				D01852E31CDA0D1700266065 /* CBWAlertView.m in Sources */,
 				D0D354F51CD9A284003FECBB /* ViewController.m in Sources */,
 				D0D354F21CD9A284003FECBB /* AppDelegate.m in Sources */,
 				D0D354EF1CD9A284003FECBB /* main.m in Sources */,
@@ -178,25 +170,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		D0D354F61CD9A284003FECBB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D0D354F71CD9A284003FECBB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D0D354FB1CD9A284003FECBB /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D0D354FC1CD9A284003FECBB /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D0D354FF1CD9A284003FECBB /* Debug */ = {
