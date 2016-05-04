@@ -1,10 +1,13 @@
 # CBWAlertView
 CustomAlertView
+#gif
+
+
 
 #useage
 
 this is a custom AlertView that can modify the color of messeage/title/button.
-also,it offer 3 animation type.
+also,it offer 3 animation type,they are fade/big to small/small to big
 
 here are examples:
 
