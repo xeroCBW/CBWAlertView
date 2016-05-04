@@ -2,8 +2,9 @@
 CustomAlertView
 #gif
 
-
-
+![fade](http://upload-images.jianshu.io/upload_images/874748-7c5538bc7fd05c15.gif?imageMogr2/auto-orient/strip)
+![bigToSmall](http://upload-images.jianshu.io/upload_images/874748-6a09e51ebd56629f.gif?imageMogr2/auto-orient/strip)
+![smallToBig](http://upload-images.jianshu.io/upload_images/874748-5810d182c482bf87.gif?imageMogr2/auto-orient/strip)
 #useage
 
 this is a custom AlertView that can modify the color of messeage/title/button.
