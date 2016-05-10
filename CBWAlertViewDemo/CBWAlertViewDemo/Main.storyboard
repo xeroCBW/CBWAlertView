@@ -32,20 +32,29 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5F8-VK-EYh">
-                                <rect key="frame" x="247.5" y="280" width="105" height="30"/>
+                                <rect key="frame" x="247" y="280" width="105" height="30"/>
                                 <state key="normal" title="从小变成大进来"/>
                                 <connections>
                                     <action selector="smallToBigAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nHe-jr-hpA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ng4-sz-NfU">
+                                <rect key="frame" x="270" y="360" width="60" height="30"/>
+                                <state key="normal" title="系统默认"/>
+                                <connections>
+                                    <action selector="systemDefault:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Vo-as-4ah"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="B5V-qd-1au" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="1C6-yo-E6z"/>
+                            <constraint firstItem="Ng4-sz-NfU" firstAttribute="top" secondItem="5F8-VK-EYh" secondAttribute="bottom" constant="50" id="7Lt-ew-9ii"/>
                             <constraint firstItem="E4I-nc-aDf" firstAttribute="top" secondItem="B5V-qd-1au" secondAttribute="bottom" constant="50" id="Iec-Ia-Nkg"/>
                             <constraint firstItem="B5V-qd-1au" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VTQ-60-gWn"/>
                             <constraint firstItem="E4I-nc-aDf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yaj-6M-CGU"/>
                             <constraint firstItem="5F8-VK-EYh" firstAttribute="top" secondItem="E4I-nc-aDf" secondAttribute="bottom" constant="50" id="qf3-t1-pzN"/>
+                            <constraint firstItem="Ng4-sz-NfU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tpI-aO-vPX"/>
                             <constraint firstItem="5F8-VK-EYh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yHf-Yx-NNp"/>
                         </constraints>
                     </view>

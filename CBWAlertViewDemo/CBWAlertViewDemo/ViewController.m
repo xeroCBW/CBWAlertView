@@ -55,17 +55,19 @@
     CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"标题" andMessage:@"内容.... message...."];
     view.animationType = AnimationTypeBigToSmall;
     //设置 title 和 message的颜色,可以不设置默认为黑色
-    view.titleTextColor = [UIColor redColor];
-    view.messageTextColor = [UIColor greenColor];
+//    view.titleTextColor = [UIColor redColor];
+//    view.messageTextColor = [UIColor greenColor];
     
-    [view addButtonWithTitle:@"取消" color:[UIColor lightGrayColor] handler:^(CBWAlertView *alertView) {
+    [view addButtonWithTitle:@"取消" color:nil handler:^(CBWAlertView *alertView) {
         NSLog(@"取消按钮点击");
         NSLog(@"%@",alertView);
     }];
     
     //设置按钮的颜色和标题
-    UIColor *color = [UIColor colorWithRed:0 green:118.0/255.0 blue:255.0/255.0 alpha:1.0];
-    [view addButtonWithTitle:@"确定" color:color handler:^(CBWAlertView *alertView) {
+    
+  
+    
+    [view addButtonWithTitle:@"确定" color:nil handler:^(CBWAlertView *alertView) {
         NSLog(@"确定按钮点击");
         NSLog(@"%@",alertView);
     }];
@@ -99,5 +101,14 @@
     [view show];
 
 }
+
+- (IBAction)systemDefault:(id)sender {
+    
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"系统中自带" message:@"这里面需要填详细信息的哦" delegate: self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView show];
+    
+}
+
+
 
 @end
