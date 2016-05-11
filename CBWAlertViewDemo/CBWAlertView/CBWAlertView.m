@@ -211,21 +211,24 @@ static float const dismisDuring = 0.1f;
         scale.mass = 3;
         scale.stiffness = 1000.0;
         scale.damping = 500.0;
-        scale.fromValue = @(1.3);
+        scale.fromValue = @(1.2);
         scale.toValue = @(1.0);
         scale.initialVelocity = 0.0;
         [self.containerView.layer addAnimation:scale forKey:scale.keyPath];
-        
+       
     }else if(self.animationType == AnimationTypeSmallToBig){
         
         self.containerView.layer.transform = CATransform3DMakeScale(0.0f, 0.0f, 1.0);
-
-        
+        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+        animation.values = @[@(0.0),@(1.1),@(1.0)];
+        animation.duration = 0.8;
+        [self.containerView.layer addAnimation:animation forKey:animation.keyPath];
     }else{
         
     }
     
-//    self.alpha = 0.6;
+//    self.alpha = 1.0;
+//    self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
     [UIView animateWithDuration:showDuring delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          
