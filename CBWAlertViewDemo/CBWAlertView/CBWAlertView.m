@@ -50,6 +50,10 @@ static float const dismisDuring = 0.1f;
 
 @implementation CBWAlertView
 
+-(void)dealloc{
+    NSLog(@"%s",__func__);
+}
+
 - (instancetype)initWithTitle:(NSString *)title andMessage:(NSString *)message{
     
     self = [super init];
@@ -255,6 +259,7 @@ static float const dismisDuring = 0.1f;
         }
         
         [self removeFromSuperview];
+        
     }];
 
 
