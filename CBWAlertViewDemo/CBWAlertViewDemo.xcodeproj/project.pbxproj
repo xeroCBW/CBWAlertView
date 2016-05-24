@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D01852E61CDA0D4A00266065 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01852E41CDA0D4A00266065 /* LaunchScreen.storyboard */; };
 		D01852E71CDA0D4A00266065 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01852E51CDA0D4A00266065 /* Main.storyboard */; };
-		D08F46091CF4069800DB86C4 /* CBWAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D08F46081CF4069800DB86C4 /* CBWAlertView.m */; };
+		D08F46171CF408EC00DB86C4 /* CBWAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D08F46161CF408EC00DB86C4 /* CBWAlertView.m */; };
 		D0D354EF1CD9A284003FECBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D354EE1CD9A284003FECBB /* main.m */; };
 		D0D354F21CD9A284003FECBB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D354F11CD9A284003FECBB /* AppDelegate.m */; };
 		D0D354F51CD9A284003FECBB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D354F41CD9A284003FECBB /* ViewController.m */; };
@@ -19,8 +19,8 @@
 /* Begin PBXFileReference section */
 		D01852E41CDA0D4A00266065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D01852E51CDA0D4A00266065 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		D08F46071CF4069800DB86C4 /* CBWAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBWAlertView.h; sourceTree = "<group>"; };
-		D08F46081CF4069800DB86C4 /* CBWAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBWAlertView.m; sourceTree = "<group>"; };
+		D08F46151CF408EC00DB86C4 /* CBWAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBWAlertView.h; sourceTree = "<group>"; };
+		D08F46161CF408EC00DB86C4 /* CBWAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBWAlertView.m; sourceTree = "<group>"; };
 		D0D354EA1CD9A284003FECBB /* CBWAlertViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBWAlertViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D354EE1CD9A284003FECBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D0D354F01CD9A284003FECBB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,19 +42,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D08F46061CF4069800DB86C4 /* CBWAlertView */ = {
+		D08F46141CF408EC00DB86C4 /* CBWAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D08F46071CF4069800DB86C4 /* CBWAlertView.h */,
-				D08F46081CF4069800DB86C4 /* CBWAlertView.m */,
+				D08F46151CF408EC00DB86C4 /* CBWAlertView.h */,
+				D08F46161CF408EC00DB86C4 /* CBWAlertView.m */,
 			);
-			path = CBWAlertView;
+			name = CBWAlertView;
+			path = ../CBWAlertView;
 			sourceTree = "<group>";
 		};
 		D0D354E11CD9A284003FECBB = {
 			isa = PBXGroup;
 			children = (
-				D08F46061CF4069800DB86C4 /* CBWAlertView */,
+				D08F46141CF408EC00DB86C4 /* CBWAlertView */,
 				D0D354EC1CD9A284003FECBB /* CBWAlertViewDemo */,
 				D0D354EB1CD9A284003FECBB /* Products */,
 			);
@@ -162,7 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D08F46091CF4069800DB86C4 /* CBWAlertView.m in Sources */,
+				D08F46171CF408EC00DB86C4 /* CBWAlertView.m in Sources */,
 				D0D354F51CD9A284003FECBB /* ViewController.m in Sources */,
 				D0D354F21CD9A284003FECBB /* AppDelegate.m in Sources */,
 				D0D354EF1CD9A284003FECBB /* main.m in Sources */,
