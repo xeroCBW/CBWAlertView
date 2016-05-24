@@ -18,7 +18,10 @@ static float const messageFont = 13.0;
 static float const buttonFont = 17.0;
 static float const buttonHeight  = 45.0;
 static float const showDuring = 0.35f;
-static float const dismisDuring = 0.3f;
+static float const dismisDuring = 0.1f;
+#define marginColor [UIColor lightGrayColor];
+#define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
+#define colorHighLight [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:0.9]
 #define randomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
 
 
@@ -47,6 +50,10 @@ static float const dismisDuring = 0.3f;
 
 @implementation CBWAlertView
 
+-(void)dealloc{
+    NSLog(@"%s",__func__);
+}
+
 - (instancetype)initWithTitle:(NSString *)title andMessage:(NSString *)message{
     
     self = [super init];
@@ -55,7 +62,8 @@ static float const dismisDuring = 0.3f;
         _message = message;
         self.frame = [UIScreen mainScreen].bounds;
         self.items = [[NSMutableArray alloc] init];
-        self.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4];
+        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+        
         self.alpha = 0.0;
     }
     return self;
@@ -76,7 +84,7 @@ static float const dismisDuring = 0.3f;
     [self resizeFrameContainerView:self.containerView];
     
     self.containerView.center = self.center;
-    self.containerView.backgroundColor = [UIColor lightGrayColor];
+    self.containerView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.4];
     [self addSubview:self.containerView];
 }
 
@@ -91,9 +99,10 @@ static float const dismisDuring = 0.3f;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = title;
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:titleFont];
-    titleLabel.textColor = self.titleTextColor;
+    titleLabel.textColor = self.titleTextColor?self.titleTextColor:[UIColor blackColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     CGSize titleSize = [title boundingRectWithSize:CGSizeMake( w - 2*lrMargin, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size;
+    titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.numberOfLines = 0;
     titleLabel.frame = CGRectMake(lrMargin, 0, w - 2*lrMargin, titleSize.height);
     titleLabel.center = CGPointMake(w * 0.5, normalMargin + titleSize.height * 0.5);
@@ -102,9 +111,10 @@ static float const dismisDuring = 0.3f;
     // 初始化label
     UILabel *messageLabel = [[UILabel alloc]init];
     messageLabel.textAlignment = NSTextAlignmentCenter;
-    messageLabel.textColor = self.messageTextColor;
+    messageLabel.textColor = self.messageTextColor?self.messageTextColor:[UIColor blackColor];
     // label获取字符串
     messageLabel.text = message;
+    messageLabel.backgroundColor = [UIColor clearColor];
     // label获取字体
     messageLabel.font = [UIFont systemFontOfSize:messageFont];
     // 根据获取到的字符串以及字体计算label需要的size
@@ -145,7 +155,7 @@ static float const dismisDuring = 0.3f;
     //设置横线
     CGRect frame = CGRectMake(0,container.bounds.size.height - buttonHeight - separatorMargin, container.bounds.size.width, separatorMargin);
     UIView *view = [[UIView alloc]initWithFrame:frame];
-    view.backgroundColor = [UIColor lightGrayColor];
+    view.backgroundColor = marginColor;
     [container addSubview:view];
     
     
@@ -155,14 +165,22 @@ static float const dismisDuring = 0.3f;
         
         UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [closeButton setTitle:item.title forState:UIControlStateNormal];
-        [closeButton setTitleColor:item.color forState:UIControlStateNormal];
-        [closeButton setTitleColor:item.color forState:UIControlStateHighlighted];
+        UIColor *itemColor = item.color?item.color:defaultBlueColor;
+        [closeButton setTitleColor:itemColor forState:UIControlStateNormal];
+        [closeButton setTitleColor:itemColor forState:UIControlStateHighlighted];
         [closeButton.titleLabel setFont:[UIFont systemFontOfSize:buttonFont]];
-        closeButton.backgroundColor = [UIColor whiteColor];
+        closeButton.backgroundColor = [UIColor clearColor];
         
+        [closeButton setBackgroundImage:[self imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [closeButton setBackgroundImage:[self imageWithColor:colorHighLight] forState:UIControlStateHighlighted];
         if (i == 0) {
             [closeButton setFrame:CGRectMake(i * buttonWidth, container.bounds.size.height - buttonHeight, buttonWidth, buttonHeight)];
         }else{
+            UIView *verticalView = [[UIView alloc]init];
+            verticalView.frame = CGRectMake(i * buttonWidth, container.bounds.size.height - buttonHeight,separatorMargin, buttonHeight);
+            verticalView.backgroundColor = marginColor;
+            [container addSubview:verticalView];
+            
             [closeButton setFrame:CGRectMake(i * buttonWidth + separatorMargin, container.bounds.size.height - buttonHeight, buttonWidth - separatorMargin, buttonHeight)];
         }
         closeButton.tag = i;
@@ -201,17 +219,20 @@ static float const dismisDuring = 0.3f;
         scale.toValue = @(1.0);
         scale.initialVelocity = 0.0;
         [self.containerView.layer addAnimation:scale forKey:scale.keyPath];
-        
+       
     }else if(self.animationType == AnimationTypeSmallToBig){
         
         self.containerView.layer.transform = CATransform3DMakeScale(0.0f, 0.0f, 1.0);
-
-        
+        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+        animation.values = @[@(0.0),@(1.1),@(1.0)];
+        animation.duration = 0.8;
+        [self.containerView.layer addAnimation:animation forKey:animation.keyPath];
     }else{
         
     }
     
-    
+//    self.alpha = 1.0;
+//    self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
     [UIView animateWithDuration:showDuring delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          
@@ -238,6 +259,7 @@ static float const dismisDuring = 0.3f;
         }
         
         [self removeFromSuperview];
+        
     }];
 
 
@@ -291,5 +313,20 @@ static float const dismisDuring = 0.3f;
         return YES;
     }
     return NO;
+}
+
+//  颜色转换为背景图片
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 @end
