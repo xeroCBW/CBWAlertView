@@ -17,7 +17,7 @@ static float const titleFont = 17;
 static float const messageFont = 13.0;
 static float const buttonFont = 17.0;
 static float const buttonHeight  = 45.0;
-static float const showDuring = 0.35f;
+static float const showDuring = 0.25f;
 static float const dismisDuring = 0.2f;
 #define marginColor [UIColor lightGrayColor];
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
@@ -240,7 +240,6 @@ static float const dismisDuring = 0.2f;
           initialSpringVelocity:1.5
                         options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
-                         
                          self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
                          self.alpha = 1.0;
                          
