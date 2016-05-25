@@ -18,7 +18,7 @@ static float const messageFont = 13.0;
 static float const buttonFont = 17.0;
 static float const buttonHeight  = 45.0;
 static float const showDuring = 0.35f;
-static float const dismisDuring = 0.1f;
+static float const dismisDuring = 0.2f;
 #define marginColor [UIColor lightGrayColor];
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
 #define colorHighLight [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:0.9]
@@ -219,6 +219,9 @@ static float const dismisDuring = 0.1f;
         scale.toValue = @(1.0);
         scale.initialVelocity = 0.0;
         [self.containerView.layer addAnimation:scale forKey:scale.keyPath];
+        
+//        self.containerView.layer.transform = CATransform3DMakeScale(1.2f, 1.2f, 1.0f);
+//        self.alpha = 0.0f;
        
     }else if(self.animationType == AnimationTypeSmallToBig){
         
@@ -231,38 +234,35 @@ static float const dismisDuring = 0.1f;
         
     }
     
-//    self.alpha = 1.0;
-//    self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
-    [UIView animateWithDuration:showDuring delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
+    [UIView animateWithDuration:showDuring
+                          delay:0.0
+         usingSpringWithDamping:0.8
+          initialSpringVelocity:1.5
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
                          self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
-                    self.alpha = 1.0;
+                         self.alpha = 1.0;
                          
-                     }
-                     completion:nil
-     ];
-    
-    
-    
-}
+                     } completion:^(BOOL finished) {}];
+
+  }
 
 - (void)dismiss{
-    
-    [UIView animateWithDuration:dismisDuring animations:^{
-        self.alpha = 0.0;
-       
-    } completion:^(BOOL finished) {
-        
-        for (UIView *v in [self subviews]) {
-            [v removeFromSuperview];
-        }
-        
-        [self removeFromSuperview];
-        
-    }];
 
-
+    [UIView animateWithDuration:dismisDuring
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         self.alpha = 0.0;
+                         
+                     } completion:^(BOOL finished) {
+                         for (UIView *v in [self subviews]) {
+                             [v removeFromSuperview];
+                         }
+                         
+                         [self removeFromSuperview];
+                     }];
     
     
 }
