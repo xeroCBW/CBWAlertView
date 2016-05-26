@@ -219,17 +219,24 @@ static float const dismisDuring = 0.2f;
         scale.toValue = @(1.0);
         scale.initialVelocity = 0.0;
         [self.containerView.layer addAnimation:scale forKey:scale.keyPath];
-        
-//        self.containerView.layer.transform = CATransform3DMakeScale(1.2f, 1.2f, 1.0f);
-//        self.alpha = 0.0f;
        
     }else if(self.animationType == AnimationTypeSmallToBig){
         
-        self.containerView.layer.transform = CATransform3DMakeScale(0.0f, 0.0f, 1.0);
-        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-        animation.values = @[@(0.0),@(1.1),@(1.0)];
-        animation.duration = 0.8;
-        [self.containerView.layer addAnimation:animation forKey:animation.keyPath];
+//        self.containerView.layer.transform = CATransform3DMakeScale(0.0f, 0.0f, 1.0);
+//        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+//        animation.values = @[@(0.0),@(1.1),@(1.0)];
+//        animation.duration = 0.8;
+//        [self.containerView.layer addAnimation:animation forKey:animation.keyPath];
+        
+        
+        self.containerView.transform = CGAffineTransformMakeScale(0, 0);
+        [UIView animateWithDuration:1 delay:0.1 usingSpringWithDamping:0.78 initialSpringVelocity:8 options:0 animations:^{
+            self.containerView.transform = CGAffineTransformIdentity;
+               self.alpha = 1.0;
+        } completion:^(BOOL finished) {
+        }];
+        
+        return;
     }else{
         
     }
