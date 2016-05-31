@@ -15,7 +15,7 @@ typedef enum : NSUInteger {
 } AnimationType;
 
 @class CBWAlertView;
-typedef void(^CBWAlertViewHandler) (CBWAlertView * _Nonnull alertView);
+typedef void(^CBWAlertViewHandler) (CBWAlertView *alertView);
 
 @interface CBWAlertView : UIView
 /** titleTextColor*/

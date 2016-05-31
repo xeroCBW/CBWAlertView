@@ -9,7 +9,6 @@
 #import "CBWAlertView.h"
 
 static float const kCBWAlertViewCornerRadius  = 10.0;
-static float const separatorMargin = 0.5;//iphone6+不会消失
 static float const normalMargin = 20.0;
 static float const lrMargin = 17.5;
 static float const titleLabelBottomMargin = 10;
@@ -19,6 +18,8 @@ static float const buttonFont = 17.0;
 static float const buttonHeight  = 45.0;
 static float const showDuring = 0.25f;
 static float const dismisDuring = 0.2f;
+static float const delayDuring = 0.1f;
+#define separatorMargin 1.0/[UIScreen mainScreen].scale//iphone6+不会消失
 #define marginColor [UIColor lightGrayColor];
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
 #define colorHighLight [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:0.9]
@@ -153,7 +154,7 @@ static float const dismisDuring = 0.2f;
     CGFloat buttonWidth = container.bounds.size.width / self.items.count;
     
     //设置横线
-    CGRect frame = CGRectMake(0,container.bounds.size.height - buttonHeight - separatorMargin, container.bounds.size.width, separatorMargin);
+    CGRect frame = CGRectMake(0,container.bounds.size.height - buttonHeight - separatorMargin, container.bounds.size.width, separatorMargin + buttonHeight);
     UIView *view = [[UIView alloc]initWithFrame:frame];
     view.backgroundColor = marginColor;
     [container addSubview:view];
@@ -232,7 +233,7 @@ static float const dismisDuring = 0.2f;
         
         
         self.containerView.transform = CGAffineTransformMakeScale(0, 0);
-        [UIView animateWithDuration:1 delay:0.1 usingSpringWithDamping:0.7 initialSpringVelocity:8 options:0 animations:^{
+        [UIView animateWithDuration:showDuring * 2 delay:delayDuring usingSpringWithDamping:0.7 initialSpringVelocity:8 options:0 animations:^{
             self.containerView.transform = CGAffineTransformIdentity;
                self.alpha = 1.0;
         } completion:^(BOOL finished) {
@@ -243,16 +244,28 @@ static float const dismisDuring = 0.2f;
         
     }
     
+//    [UIView animateWithDuration:showDuring
+//                          delay:0.1
+//         usingSpringWithDamping:0.9
+//          initialSpringVelocity:4
+//                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
+//                     animations:^{
+//                         self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
+//                         self.alpha = 1.0;
+//                         
+//                     } completion:^(BOOL finished) {}];
+
+    
+    
+    
     [UIView animateWithDuration:showDuring
-                          delay:0.1
-         usingSpringWithDamping:0.9
-          initialSpringVelocity:4
-                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
+                          delay:delayDuring options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
-                         self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
-                         self.alpha = 1.0;
                          
-                     } completion:^(BOOL finished) {}];
+                          self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
+                         self.alpha = 1.0f;
+                         
+                     } completion:nil];
 
   }
 
