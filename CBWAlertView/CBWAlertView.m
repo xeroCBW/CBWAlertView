@@ -28,7 +28,7 @@ static float const dismisDuring = 0.2f;
 #pragma mark - AlertButtonItem
 @interface AlertButtonItem : NSObject
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, assign) UIColor *color;
+@property (nonatomic, strong) UIColor *color;
 @property (nonatomic, copy) CBWAlertViewHandler action;
 @end
 //一定要有实现,要不然不能运行
