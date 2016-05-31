@@ -211,14 +211,16 @@ static float const dismisDuring = 0.2f;
    
     if (self.animationType == AnimationTypeBigToSmall) {
       
-        CASpringAnimation *scale = [CASpringAnimation animationWithKeyPath:@"transform.scale"];
-        scale.mass = 3;
-        scale.stiffness = 1000.0;
-        scale.damping = 500.0;
-        scale.fromValue = @(1.2);
-        scale.toValue = @(1.0);
-        scale.initialVelocity = 0.0;
-        [self.containerView.layer addAnimation:scale forKey:scale.keyPath];
+        self.containerView.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1);
+     
+//        CASpringAnimation *scale = [CASpringAnimation animationWithKeyPath:@"transform.scale"];
+//        scale.mass = 3;
+//        scale.stiffness = 1000.0;
+//        scale.damping = 500.0;
+//        scale.fromValue = @(1.2);
+//        scale.toValue = @(1.0);
+//        scale.initialVelocity = 0.0;
+//        [self.containerView.layer addAnimation:scale forKey:scale.keyPath];
        
     }else if(self.animationType == AnimationTypeSmallToBig){
         
@@ -230,7 +232,7 @@ static float const dismisDuring = 0.2f;
         
         
         self.containerView.transform = CGAffineTransformMakeScale(0, 0);
-        [UIView animateWithDuration:1 delay:0.1 usingSpringWithDamping:0.78 initialSpringVelocity:8 options:0 animations:^{
+        [UIView animateWithDuration:1 delay:0.1 usingSpringWithDamping:0.7 initialSpringVelocity:8 options:0 animations:^{
             self.containerView.transform = CGAffineTransformIdentity;
                self.alpha = 1.0;
         } completion:^(BOOL finished) {
@@ -242,9 +244,9 @@ static float const dismisDuring = 0.2f;
     }
     
     [UIView animateWithDuration:showDuring
-                          delay:0.0
-         usingSpringWithDamping:0.8
-          initialSpringVelocity:1.5
+                          delay:0.1
+         usingSpringWithDamping:0.9
+          initialSpringVelocity:4
                         options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);

@@ -15,21 +15,21 @@ typedef enum : NSUInteger {
 } AnimationType;
 
 @class CBWAlertView;
-typedef void(^CBWAlertViewHandler)(CBWAlertView *alertView);
+typedef void(^CBWAlertViewHandler) (CBWAlertView * _Nonnull alertView);
 
 @interface CBWAlertView : UIView
-/** animationType*/
-@property (nonatomic ,assign)  AnimationType animationType;
-/** containerView*/
-@property (nonatomic ,strong) UIView *containerView;
 /** titleTextColor*/
 @property (nonatomic ,strong) UIColor *titleTextColor;
 /** messageTextColor*/
 @property (nonatomic ,strong) UIColor *messageTextColor;
+/** animationType*/
+@property (nonatomic ,assign)  AnimationType animationType;
+/** containerView*/
+@property (nonatomic ,strong) UIView *containerView;
 /** 处理button 点击的block*/
 @property (nonatomic ,strong) void (^buttonClickActionBlock)(CBWAlertView *alertView,NSUInteger index);
 - (instancetype)initWithTitle:(NSString *)title andMessage:(NSString *)message;
-- (void)addButtonWithTitle:(NSString *)title color:(UIColor *)color handler:(CBWAlertViewHandler)handler;
+- (void)addButtonWithTitle:(NSString *)title color:(UIColor *)color handler:(CBWAlertViewHandler )handler;
 
 - (void)show;
 - (void)dismiss;
