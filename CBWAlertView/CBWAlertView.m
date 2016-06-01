@@ -18,7 +18,7 @@ static float const buttonFont = 17.0;
 static float const buttonHeight  = 45.0;
 static float const showDuring = 0.25f;
 static float const dismisDuring = 0.2f;
-static float const delayDuring = 0.1f;
+static float const delayDuring = 0.15f;
 #define separatorMargin 1.0/[UIScreen mainScreen].scale//iphone6+不会消失
 #define marginColor [UIColor lightGrayColor];
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
@@ -52,6 +52,8 @@ static float const delayDuring = 0.1f;
 @implementation CBWAlertView
 
 -(void)dealloc{
+    
+    [self removeObserve];
     NSLog(@"%s",__func__);
 }
 
@@ -69,16 +71,37 @@ static float const delayDuring = 0.1f;
     }
     return self;
     
+
+}
+
+- (void)addObserver{
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;
+    [self.containerView.layer addObserver:self forKeyPath:@"scale" options:options context:nil];
+}
+
+- (void)removeObserve{
+    
+    [self.containerView.layer removeObserver:self forKeyPath:@"scale"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    if ([keyPath  isEqual: @"scale"]) {
+        NSLog(@"=scrollViewContentOffsetKeyPath=%f",self.containerView.layer.contentsScale);
+        
+    }
+
     
 }
 
-#pragma mark - method
+#pragma mark - init
 - (void) creatContainerView{
     
     if (self.containerView == nil) {
         
         [self setUpDefaultView];
         
+        [self addObserver];
     }
     
     //重新设置尺寸,增加下面 button 的位置
@@ -129,7 +152,7 @@ static float const delayDuring = 0.1f;
         //不做处理
     }
     messageLabel.frame = CGRectMake(lrMargin, normalMargin + titleSize.height + titleLabelBottomMargin, w - 2*lrMargin, messageSize.height);
-    NSLog(@"%f====%f",messageSize.height,messageSize.width);
+//    NSLog(@"%f====%f",messageSize.height,messageSize.width);
     
     //h需要改变
     CGFloat  h = [self isBlankString:message]?normalMargin + titleSize.height + normalMargin:normalMargin + titleSize.height + titleLabelBottomMargin + messageSize.height + normalMargin;
@@ -233,7 +256,7 @@ static float const delayDuring = 0.1f;
         
         
         self.containerView.transform = CGAffineTransformMakeScale(0, 0);
-        [UIView animateWithDuration:showDuring * 2 delay:delayDuring usingSpringWithDamping:0.7 initialSpringVelocity:8 options:0 animations:^{
+        [UIView animateWithDuration:showDuring * 2 delay:delayDuring usingSpringWithDamping:0.7 initialSpringVelocity:0.5 options:0 animations:^{
             self.containerView.transform = CGAffineTransformIdentity;
                self.alpha = 1.0;
         } completion:^(BOOL finished) {
@@ -301,16 +324,6 @@ static float const delayDuring = 0.1f;
 }
 
 
-#pragma mark - setter && getter
--(NSMutableArray *)items{
-    if (_items == nil) {
-        _items = [NSMutableArray array];
-    }
-    return _items;
-}
-
-
-
 #pragma mark - private
 
 - (void)buttonAction:(UIButton *)button{
@@ -350,4 +363,14 @@ static float const delayDuring = 0.1f;
     
     return image;
 }
+
+#pragma mark - setter && getter
+-(NSMutableArray *)items{
+    if (_items == nil) {
+        _items = [NSMutableArray array];
+    }
+    return _items;
+}
+
+
 @end

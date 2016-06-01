@@ -58,8 +58,9 @@
     view.titleTextColor = [UIColor redColor];
     view.messageTextColor = [UIColor greenColor];
     
-    [view addButtonWithTitle:@"取消" color:nil handler:nil];
     
+    //TODO:handle 可以不设置
+    [view addButtonWithTitle:@"取消" color:nil handler:nil];
 
     [view addButtonWithTitle:@"确定" color:nil handler:^(CBWAlertView *alertView) {
         NSLog(@"确定按钮点击");
