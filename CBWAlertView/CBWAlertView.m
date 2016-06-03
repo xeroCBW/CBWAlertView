@@ -88,10 +88,7 @@ static float const delayDuring = 0.15f;
     
     if ([keyPath  isEqual: @"scale"]) {
         NSLog(@"=scrollViewContentOffsetKeyPath=%f",self.containerView.layer.contentsScale);
-        
     }
-
-    
 }
 
 #pragma mark - init
@@ -229,10 +226,8 @@ static float const delayDuring = 0.15f;
     [self creatContainerView];
     [self addButtonsToView:self.containerView];
     
-    
     [[[[UIApplication sharedApplication] windows] firstObject] addSubview:self];
     
-   
     if (self.animationType == AnimationTypeBigToSmall) {
       
         self.containerView.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1);
@@ -256,7 +251,7 @@ static float const delayDuring = 0.15f;
         
         
         self.containerView.transform = CGAffineTransformMakeScale(0, 0);
-        [UIView animateWithDuration:showDuring * 2 delay:delayDuring usingSpringWithDamping:0.7 initialSpringVelocity:0.5 options:0 animations:^{
+        [UIView animateWithDuration:1.0 delay:delayDuring usingSpringWithDamping:0.5 initialSpringVelocity:10 options:0 animations:^{
             self.containerView.transform = CGAffineTransformIdentity;
                self.alpha = 1.0;
         } completion:^(BOOL finished) {
