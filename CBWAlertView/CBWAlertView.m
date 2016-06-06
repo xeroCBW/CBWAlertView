@@ -19,8 +19,8 @@ static float const buttonHeight  = 45.0;
 static float const showDuring = 0.25f;
 static float const dismisDuring = 0.2f;
 static float const delayDuring = 0.15f;
-#define separatorMargin 1.0/[UIScreen mainScreen].scale//iphone6+不会消失
-#define marginColor [UIColor lightGrayColor];
+#define separatorMargin 0.5///[UIScreen mainScreen].scale//iphone6+不会消失
+#define marginColor [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1]
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
 #define colorHighLight [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:0.9]
 #define randomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
@@ -177,6 +177,7 @@ static float const delayDuring = 0.15f;
     CGRect frame = CGRectMake(0,container.bounds.size.height - buttonHeight - separatorMargin, container.bounds.size.width, separatorMargin + buttonHeight);
     UIView *view = [[UIView alloc]initWithFrame:frame];
     view.backgroundColor = marginColor;
+    
     [container addSubview:view];
     
     
@@ -230,8 +231,8 @@ static float const delayDuring = 0.15f;
     
     if (self.animationType == AnimationTypeBigToSmall) {
       
-        self.containerView.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1);
-     
+//        self.containerView.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1);
+        self.transform = CGAffineTransformMakeScale(1.15, 1.15);
 //        CASpringAnimation *scale = [CASpringAnimation animationWithKeyPath:@"transform.scale"];
 //        scale.mass = 3;
 //        scale.stiffness = 1000.0;
@@ -243,19 +244,35 @@ static float const delayDuring = 0.15f;
        
     }else if(self.animationType == AnimationTypeSmallToBig){
         
-//        self.containerView.layer.transform = CATransform3DMakeScale(0.0f, 0.0f, 1.0);
-//        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-//        animation.values = @[@(0.0),@(1.1),@(1.0)];
-//        animation.duration = 0.8;
-//        [self.containerView.layer addAnimation:animation forKey:animation.keyPath];
+//        self.transform = CGAffineTransformMakeScale(0.4,0.4);
+//       
+//        [UIView animateWithDuration:1.0 delay:delayDuring usingSpringWithDamping:0.5 initialSpringVelocity:10 options:0 animations:^{
+//            
+//            self.transform = CGAffineTransformIdentity;
+//               self.alpha = 1.0;
+//        } completion:^(BOOL finished) {
+//        }];
+        
+       
+        self.containerView.transform = CGAffineTransformMakeScale(0.0, 0.0);
         
         
-        self.containerView.transform = CGAffineTransformMakeScale(0, 0);
-        [UIView animateWithDuration:1.0 delay:delayDuring usingSpringWithDamping:0.5 initialSpringVelocity:10 options:0 animations:^{
-            self.containerView.transform = CGAffineTransformIdentity;
-               self.alpha = 1.0;
-        } completion:^(BOOL finished) {
-        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [UIView animateWithDuration:0.5 animations:^{
+                self.alpha = 1;
+                self.containerView.transform = CGAffineTransformMakeScale(1, 1);
+            }];
+
+        });
+       
+        //        [UIView animateWithDuration:1.0 delay:delayDuring usingSpringWithDamping:0.5 initialSpringVelocity:10 options:0 animations:^{
+        //
+        //            self.transform = CGAffineTransformIdentity;
+        //               self.alpha = 1.0;
+        //        } completion:^(BOOL finished) {
+        //        }];
+
         
         return;
     }else{
@@ -280,7 +297,7 @@ static float const delayDuring = 0.15f;
                           delay:delayDuring options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
-                          self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
+                         self.transform = CGAffineTransformMakeScale(1.0, 1.0);
                          self.alpha = 1.0f;
                          
                      } completion:nil];
