@@ -20,7 +20,7 @@ static float const showDuring = 0.25f;
 static float const dismisDuring = 0.2f;
 static float const delayDuring = 0.15f;
 #define separatorMargin 0.5///[UIScreen mainScreen].scale//iphone6+不会消失
-#define marginColor [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1]
+#define marginColor [UIColor colorWithRed:196.0/255 green:196.0/255 blue:201.0/255 alpha:1.0]//[UIColor colorWithRed:211.0/255.0 green:219.0/255.0 blue:223.0/255.0 alpha:1.0]//[UIColor groupTableViewBackgroundColor]//211  219 223//[UIColor clearColor]//
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
 #define colorHighLight [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:0.9]
 #define randomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
@@ -51,11 +51,6 @@ static float const delayDuring = 0.15f;
 
 @implementation CBWAlertView
 
--(void)dealloc{
-    
-    [self removeObserve];
-    NSLog(@"%s",__func__);
-}
 
 - (instancetype)initWithTitle:(NSString *)title andMessage:(NSString *)message{
     
@@ -74,22 +69,8 @@ static float const delayDuring = 0.15f;
 
 }
 
-- (void)addObserver{
-    NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;
-    [self.containerView.layer addObserver:self forKeyPath:@"scale" options:options context:nil];
-}
 
-- (void)removeObserve{
-    
-    [self.containerView.layer removeObserver:self forKeyPath:@"scale"];
-}
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
-    if ([keyPath  isEqual: @"scale"]) {
-        NSLog(@"=scrollViewContentOffsetKeyPath=%f",self.containerView.layer.contentsScale);
-    }
-}
 
 #pragma mark - init
 - (void) creatContainerView{
@@ -97,15 +78,14 @@ static float const delayDuring = 0.15f;
     if (self.containerView == nil) {
         
         [self setUpDefaultView];
-        
-        [self addObserver];
+
     }
     
     //重新设置尺寸,增加下面 button 的位置
     [self resizeFrameContainerView:self.containerView];
     
     self.containerView.center = self.center;
-    self.containerView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+    self.containerView.backgroundColor =[UIColor colorWithRed:0.96 green:1.0 blue:1.0 alpha:1.0];// [UIColor colorWithRed:246.0/255 green:246.0/25 blue:246.0/25 alpha:1.0];//[UIColor clearColor];
     [self addSubview:self.containerView];
 }
 
@@ -172,14 +152,17 @@ static float const delayDuring = 0.15f;
     if (self.items.count == 0) { return; }
     
     CGFloat buttonWidth = container.bounds.size.width / self.items.count;
-    
+   
     //设置横线
-    CGRect frame = CGRectMake(0,container.bounds.size.height - buttonHeight - separatorMargin, container.bounds.size.width, separatorMargin + buttonHeight);
-    UIView *view = [[UIView alloc]initWithFrame:frame];
-    view.backgroundColor = marginColor;
+    CGRect lineFrame = CGRectMake(0,container.bounds.size.height - buttonHeight - separatorMargin, container.bounds.size.width, separatorMargin);
+    UIView *lineview = [[UIView alloc]initWithFrame:lineFrame];
+    lineview.backgroundColor = marginColor;
+    [container addSubview:lineview];
     
-    [container addSubview:view];
-    
+    CGRect frame = CGRectMake(0,container.bounds.size.height - buttonHeight, container.bounds.size.width, buttonHeight);
+    UIView *buttonView = [[UIView alloc]initWithFrame:frame];
+    buttonView.backgroundColor = [UIColor whiteColor];
+    [container addSubview:buttonView];
     
     for (int i=0; i<self.items.count; i++) {
         
@@ -192,22 +175,22 @@ static float const delayDuring = 0.15f;
         [closeButton setTitleColor:itemColor forState:UIControlStateHighlighted];
         [closeButton.titleLabel setFont:[UIFont systemFontOfSize:buttonFont]];
         closeButton.backgroundColor = [UIColor clearColor];
-        
-        [closeButton setBackgroundImage:[self imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [closeButton setBackgroundImage:[self imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
         [closeButton setBackgroundImage:[self imageWithColor:colorHighLight] forState:UIControlStateHighlighted];
         if (i == 0) {
-            [closeButton setFrame:CGRectMake(i * buttonWidth, container.bounds.size.height - buttonHeight, buttonWidth, buttonHeight)];
+            [closeButton setFrame:CGRectMake(i * buttonWidth, 0, buttonWidth, buttonHeight)];
         }else{
-            UIView *verticalView = [[UIView alloc]init];
-            verticalView.frame = CGRectMake(i * buttonWidth, container.bounds.size.height - buttonHeight,separatorMargin, buttonHeight);
-            verticalView.backgroundColor = marginColor;
-            [container addSubview:verticalView];
+            [closeButton setFrame:CGRectMake(i * buttonWidth + separatorMargin, 0, buttonWidth - separatorMargin, buttonHeight)];
             
-            [closeButton setFrame:CGRectMake(i * buttonWidth + separatorMargin, container.bounds.size.height - buttonHeight, buttonWidth - separatorMargin, buttonHeight)];
+            //增加横线
+            UIView *verticalView = [[UIView alloc]init];
+            verticalView.frame = CGRectMake(i * buttonWidth, 0,separatorMargin, buttonHeight);
+            verticalView.backgroundColor = marginColor;
+            [buttonView addSubview:verticalView];
         }
         closeButton.tag = i;
         [closeButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [container addSubview:closeButton];
+        [buttonView addSubview:closeButton];
     }
 }
 
@@ -215,7 +198,7 @@ static float const delayDuring = 0.15f;
 - (void)resizeFrameContainerView:(UIView *)containerView{
     
     CGRect frame = containerView.frame;
-    frame = CGRectMake(0, 0, frame.size.width, frame.size.height + buttonHeight);
+    frame = CGRectMake(0, 0, frame.size.width, frame.size.height + buttonHeight + separatorMargin);
     containerView.frame = frame;
     
 }
