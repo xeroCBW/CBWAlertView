@@ -18,7 +18,7 @@ static float const buttonFont = 17.0;
 static float const buttonHeight  = 45.0;
 static float const showDuring = 0.25f;
 static float const dismisDuring = 0.2f;
-static float const delayDuring = 0.15f;
+static float const delayDuring = 0.1f;
 #define separatorMargin 0.5///[UIScreen mainScreen].scale//iphone6+不会消失
 #define marginColor [UIColor colorWithRed:196.0/255 green:196.0/255 blue:201.0/255 alpha:1.0]//[UIColor colorWithRed:211.0/255.0 green:219.0/255.0 blue:223.0/255.0 alpha:1.0]//[UIColor groupTableViewBackgroundColor]//211  219 223//[UIColor clearColor]//
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
@@ -210,80 +210,40 @@ static float const delayDuring = 0.15f;
     [self creatContainerView];
     [self addButtonsToView:self.containerView];
     
-    [[[[UIApplication sharedApplication] windows] firstObject] addSubview:self];
+    [[[[UIApplication sharedApplication] windows] lastObject] addSubview:self];
     
     if (self.animationType == AnimationTypeBigToSmall) {
-      
-//        self.containerView.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1);
-        self.transform = CGAffineTransformMakeScale(1.15, 1.15);
-//        CASpringAnimation *scale = [CASpringAnimation animationWithKeyPath:@"transform.scale"];
-//        scale.mass = 3;
-//        scale.stiffness = 1000.0;
-//        scale.damping = 500.0;
-//        scale.fromValue = @(1.2);
-//        scale.toValue = @(1.0);
-//        scale.initialVelocity = 0.0;
-//        [self.containerView.layer addAnimation:scale forKey:scale.keyPath];
-       
-    }else if(self.animationType == AnimationTypeSmallToBig){
         
-//        self.transform = CGAffineTransformMakeScale(0.4,0.4);
-//       
-//        [UIView animateWithDuration:1.0 delay:delayDuring usingSpringWithDamping:0.5 initialSpringVelocity:10 options:0 animations:^{
-//            
-//            self.transform = CGAffineTransformIdentity;
-//               self.alpha = 1.0;
-//        } completion:^(BOOL finished) {
-//        }];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.alpha = 1;
+        }];
         
-       
-        self.containerView.transform = CGAffineTransformMakeScale(0.0, 0.0);
-        
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [UIView animateWithDuration:0.6 animations:^{
-                self.alpha = 1;
-                self.containerView.transform = CGAffineTransformMakeScale(1, 1);
-            }];
-
-        });
-       
-        //        [UIView animateWithDuration:1.0 delay:delayDuring usingSpringWithDamping:0.5 initialSpringVelocity:10 options:0 animations:^{
-        //
-        //            self.transform = CGAffineTransformIdentity;
-        //               self.alpha = 1.0;
-        //        } completion:^(BOOL finished) {
-        //        }];
-
+        CAKeyframeAnimation *k = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+        k.values = @[ @(1.2), @(1.1), @(1.0) ];
+        k.keyTimes = @[ @(0.0), @(0.5), @(0.9) ];
+        k.calculationMode = kCAAnimationLinear;
+        [self.containerView.layer addAnimation:k forKey:@"ShowAlertView"];
         
         return;
-    }else{
+        
+    }else if(self.animationType == AnimationTypeSmallToBig){
+        
+        self.containerView.transform = CGAffineTransformMakeScale(0.0, 0.0);
         
     }
-    
-//    [UIView animateWithDuration:showDuring
-//                          delay:0.1
-//         usingSpringWithDamping:0.9
-//          initialSpringVelocity:4
-//                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
-//                     animations:^{
-//                         self.containerView.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1);
-//                         self.alpha = 1.0;
-//                         
-//                     } completion:^(BOOL finished) {}];
-
-    
-    
     
     [UIView animateWithDuration:showDuring
                           delay:delayDuring options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
-                         self.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         self.containerView.transform = CGAffineTransformMakeScale(1.0, 1.0);
                          self.alpha = 1.0f;
                          
                      } completion:nil];
+    
+    
+   
+
 
   }
 
@@ -303,7 +263,7 @@ static float const delayDuring = 0.15f;
                          [self removeFromSuperview];
                      }];
     
-    
+
 }
 
 #pragma mark - public

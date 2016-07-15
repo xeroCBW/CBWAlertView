@@ -25,7 +25,7 @@
  */
 - (IBAction)fadeAction:(id)sender {
     
-    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"标题" andMessage:@"内容.... message...."];
+    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"标题" andMessage:@"内容.... message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message...."];
 //    view.animationType = AnimationTypeBigToSmall;
     //设置 title 和 message的颜色,可以不设置默认为黑色
     view.titleTextColor = [UIColor redColor];
@@ -100,6 +100,10 @@
 - (IBAction)systemDefault:(id)sender {
     
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"系统中自带" message:@"这里面需要填详细信息的哦" delegate: self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    
+    alertView.title = @"121312";
+    alertView.message = @"1321211";
+    
     [alertView show];
     
 }
