@@ -18,7 +18,7 @@ static float const buttonFont = 17.0;
 static float const buttonHeight  = 45.0;
 static float const showDuring = 0.25f;
 static float const dismisDuring = 0.2f;
-static float const delayDuring = 0.1f;
+static float const delayDuring = 0.0f;
 #define separatorMargin 0.5///[UIScreen mainScreen].scale//iphone6+不会消失
 #define marginColor [UIColor colorWithRed:196.0/255 green:196.0/255 blue:201.0/255 alpha:1.0]//[UIColor colorWithRed:211.0/255.0 green:219.0/255.0 blue:223.0/255.0 alpha:1.0]//[UIColor groupTableViewBackgroundColor]//211  219 223//[UIColor clearColor]//
 #define defaultBlueColor [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]
@@ -69,7 +69,10 @@ static float const delayDuring = 0.1f;
 
 }
 
-
+-(void)dealloc{
+    
+    NSLog(@"%s",__func__);
+}
 
 
 #pragma mark - init
@@ -240,12 +243,7 @@ static float const delayDuring = 0.1f;
                          self.alpha = 1.0f;
                          
                      } completion:nil];
-    
-    
-   
-
-
-  }
+}
 
 - (void)dismiss{
 
