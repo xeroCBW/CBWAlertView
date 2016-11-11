@@ -213,7 +213,16 @@ static float const delayDuring = 0.0f;
     [self creatContainerView];
     [self addButtonsToView:self.containerView];
     
-    [[[[UIApplication sharedApplication] windows] lastObject] addSubview:self];
+
+    UIWindow *window = [[[UIApplication sharedApplication] windows] lastObject];
+    
+    //如果发现键盘windows 出现,就选键盘下一个 windows
+    if ([window isKindOfClass:[NSClassFromString(@"UIRemoteKeyboardWindow") class]]) {
+        
+        window = [[UIApplication sharedApplication].windows objectAtIndex:([UIApplication sharedApplication].windows.count -2)];
+    }
+    
+    [window addSubview:self];
     
     if (self.animationType == AnimationTypeBigToSmall) {
         
