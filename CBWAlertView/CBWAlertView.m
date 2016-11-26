@@ -108,6 +108,9 @@ static float const delayDuring = 0.0f;
     CGSize titleSize = [title boundingRectWithSize:CGSizeMake( w - 2*lrMargin, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size;
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.numberOfLines = 0;
+    if (!title.length) {
+       titleSize = CGSizeMake(0,0);
+    }
     titleLabel.frame = CGRectMake(lrMargin, 0, w - 2*lrMargin, titleSize.height);
     titleLabel.center = CGPointMake(w * 0.5, normalMargin + titleSize.height * 0.5);
     

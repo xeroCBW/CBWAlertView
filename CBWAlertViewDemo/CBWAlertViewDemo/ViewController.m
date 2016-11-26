@@ -24,7 +24,7 @@
  */
 - (IBAction)fadeAction:(id)sender {
     
-    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"标题" andMessage:@"内容.... message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message...."];
+    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"" andMessage:@"内容.... message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message....message...."];
 //    view.animationType = AnimationTypeBigToSmall;
     //设置 title 和 message的颜色,可以不设置默认为黑色
     view.titleTextColor = [UIColor redColor];
@@ -51,7 +51,7 @@
  *  从大变成小进来(系统效果)
  */
 - (IBAction)bigToSmallAction:(id)sender {
-    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"标题" andMessage:@"内容.... message...."];
+    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"标" andMessage:@"内容.... message...."];
     view.animationType = AnimationTypeBigToSmall;
     //设置 title 和 message的颜色,可以不设置默认为黑色
     view.titleTextColor = [UIColor redColor];
@@ -74,7 +74,7 @@
  */
 - (IBAction)smallToBigAction:(id)sender {
     
-    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:@"标题" andMessage:@"内容.... message...."];
+    CBWAlertView *view = [[CBWAlertView alloc]initWithTitle:nil andMessage:@"内容.... message...."];
         view.animationType = AnimationTypeSmallToBig;
     //设置 title 和 message的颜色,可以不设置默认为黑色
     view.titleTextColor = [UIColor redColor];
