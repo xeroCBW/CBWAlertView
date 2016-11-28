@@ -65,11 +65,14 @@ static float const delayDuring = 0.0f;
         self.alpha = 0.0;
     }
     return self;
-    
 
 }
 
+
+
 -(void)dealloc{
+    
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     NSLog(@"%s",__func__);
 }
@@ -90,6 +93,9 @@ static float const delayDuring = 0.0f;
     self.containerView.center = self.center;
     self.containerView.backgroundColor =[UIColor colorWithRed:0.96 green:1.0 blue:1.0 alpha:1.0];// [UIColor colorWithRed:246.0/255 green:246.0/25 blue:246.0/25 alpha:1.0];//[UIColor clearColor];
     [self addSubview:self.containerView];
+    
+    //添加通知
+    [ self addNotification];
 }
 
 - (void)setUpDefaultView{
@@ -146,8 +152,8 @@ static float const delayDuring = 0.0f;
     
     UIView *backgroupView = [[UIView alloc]initWithFrame:CGRectMake(x, y, w, h)];
     backgroupView.backgroundColor = [UIColor whiteColor];
-    [self.containerView addSubview:backgroupView];
     
+    [self.containerView addSubview:backgroupView];
     [self.containerView addSubview:titleLabel];
     [self.containerView addSubview:messageLabel];
 
@@ -208,6 +214,16 @@ static float const delayDuring = 0.0f;
     containerView.frame = frame;
     
 }
+
+#pragma mark - Notification
+
+- (void)addNotification{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+}
+
+
 
 #pragma mark - show && dismiss
 
@@ -272,9 +288,22 @@ static float const delayDuring = 0.0f;
                          
                          [self removeFromSuperview];
                      }];
+}
+
+#pragma mark - Rotate
+
+- (void)orientChange:(UIDeviceOrientation )orientation{
     
+    float w = [UIScreen mainScreen].bounds.size.width;
+    float h = [UIScreen mainScreen].bounds.size.height;
+    self.frame = CGRectMake(0, 0, w, h);
+    
+    self.containerView.center = self.center;
+
+    [self setNeedsLayout];
 
 }
+
 
 #pragma mark - public
 
