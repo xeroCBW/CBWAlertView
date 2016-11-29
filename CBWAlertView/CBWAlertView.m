@@ -45,6 +45,9 @@ static float const delayDuring = 0.0f;
 @property (nonatomic ,copy) NSString *message;
 /** 用来装 buttonItem 的数组*/
 @property (nonatomic ,strong) NSMutableArray *items;
+
+@property (nonatomic, assign) float w;
+@property (nonatomic, assign) float h;
 @end
 
 
@@ -58,23 +61,21 @@ static float const delayDuring = 0.0f;
     if (self) {
         _title = title;
         _message = message;
-        self.frame = [UIScreen mainScreen].bounds;
+
         self.items = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+        
+        //用来记录第一次 Akira 宽高,省的以后旋转后变成 w=h
+        self.w = [UIScreen mainScreen].bounds.size.width;
+        self.h = [UIScreen mainScreen].bounds.size.height;
+        
+        //设置屏幕宽高跟随屏幕.和屏幕一样大
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        self.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         
         self.alpha = 0.0;
     }
     return self;
-
-}
-
-
-
--(void)dealloc{
-    
-     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    NSLog(@"%s",__func__);
 }
 
 
@@ -84,7 +85,6 @@ static float const delayDuring = 0.0f;
     if (self.containerView == nil) {
         
         [self setUpDefaultView];
-
     }
     
     //重新设置尺寸,增加下面 button 的位置
@@ -93,9 +93,7 @@ static float const delayDuring = 0.0f;
     self.containerView.center = self.center;
     self.containerView.backgroundColor =[UIColor colorWithRed:0.96 green:1.0 blue:1.0 alpha:1.0];// [UIColor colorWithRed:246.0/255 green:246.0/25 blue:246.0/25 alpha:1.0];//[UIColor clearColor];
     [self addSubview:self.containerView];
-    
-    //添加通知
-    [ self addNotification];
+
 }
 
 - (void)setUpDefaultView{
@@ -215,16 +213,6 @@ static float const delayDuring = 0.0f;
     
 }
 
-#pragma mark - Notification
-
-- (void)addNotification{
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)name:UIDeviceOrientationDidChangeNotification object:nil];
-    
-}
-
-
-
 #pragma mark - show && dismiss
 
 -(void)show{
@@ -240,7 +228,7 @@ static float const delayDuring = 0.0f;
         
         window = [[UIApplication sharedApplication].windows objectAtIndex:([UIApplication sharedApplication].windows.count -2)];
     }
-    
+
     [window addSubview:self];
     
     if (self.animationType == AnimationTypeBigToSmall) {
@@ -289,20 +277,24 @@ static float const delayDuring = 0.0f;
                          [self removeFromSuperview];
                      }];
 }
-
-#pragma mark - Rotate
-
-- (void)orientChange:(UIDeviceOrientation )orientation{
+/*
+系统会判断是否需要重新 layoutSubView
+例如:横屏-->竖屏
+例如:竖屏-->横屏
+横屏-->横屏:不会重新 layOut
+竖屏-->竖屏:不会重新 layOut
+ */
+-(void)layoutSubviews{
     
-    float w = [UIScreen mainScreen].bounds.size.width;
+    [super layoutSubviews];
+    //子类是跟随父类的;所以旋转不需要设置重新设置子类的 frame
+    //由于是设置了 autosizng;但是还是要设置下尺寸
+    float w = [UIScreen mainScreen].bounds.size.width;;
     float h = [UIScreen mainScreen].bounds.size.height;
     self.frame = CGRectMake(0, 0, w, h);
-    
     self.containerView.center = self.center;
-
-    [self setNeedsLayout];
-
 }
+
 
 
 #pragma mark - public
